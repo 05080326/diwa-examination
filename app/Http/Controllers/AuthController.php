@@ -39,13 +39,12 @@ class AuthController extends Controller
             'username' => 'required|unique:users',
             'fullname' => 'required',
             'password' => 'required|min:6',
-            'role' => 'required|in:admin,user',
+            'role' => 'required|in:teacher,student',
         ]);
 
         User::create([
             'username' => $request->username,
             'fullname' => $request->fullname,
-            'name' => $request->fullname,
             'email' => $request->username . '@example.com',
             'password' => Hash::make($request->password),
             'role' => $request->role,

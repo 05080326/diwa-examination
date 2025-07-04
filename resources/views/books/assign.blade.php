@@ -3,11 +3,11 @@
 <head>
     <title>Assign Book to User</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            max-width: 600px; 
-            margin: 50px auto; 
-            padding: 20px; 
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
             background-color: #f8f9fa;
         }
         .container {
@@ -24,8 +24,8 @@
             border-bottom: 2px solid #007cba;
             padding-bottom: 15px;
         }
-        h2 { 
-            color: #007cba; 
+        h2 {
+            color: #007cba;
             margin: 0;
         }
         .form-group {
@@ -75,6 +75,14 @@
             margin-bottom: 20px;
             border: 1px solid #c3e6cb;
         }
+        .error {
+            background: #edd4da;
+            color: #571517;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #e6c3cc;
+        }
         .book-preview, .user-preview {
             background: #f8f9fa;
             padding: 15px;
@@ -95,29 +103,39 @@
             <h2>Assign Book to User</h2>
             <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a>
         </div>
-        
+
+        @if(session('error'))
+            <div class="error">{{ session('error') }}</div>
+        @endif
+
         @if(session('success'))
             <div class="success">{{ session('success') }}</div>
         @endif
-        
+
         <form method="POST" action="/books/assign">
             @csrf
-            
+
             <div class="form-group">
                 <label for="book_id">Select Book *</label>
                 <select id="book_id" name="book_id" required onchange="showBookPreview()">
                     <option value="">Choose a book...</option>
+                    @foreach($books as $book)
+                        <option value="{{ $book->id }}">{{ $book->title }}</option>
+                    @endforeach
                 </select>
                 <div id="bookPreview" class="book-preview" style="display: none;">
                     <div class="preview-title" id="bookTitle"></div>
                     <div id="bookDesc"></div>
                 </div>
             </div>
-            
+
             <div class="form-group">
-                <label for="user_id">Select User *</label>
+                <label for="user_id">Select student *</label>
                 <select id="user_id" name="user_id" required onchange="showUserPreview()">
-                    <option value="">Choose a user...</option>
+                    <option value="">Choose a student...</option>
+                    @foreach($students as $student)
+                        <option value="{{ $student->id }}">{{ $student->fullname }}</option>
+                    @endforeach
                 </select>
             </div>
 
