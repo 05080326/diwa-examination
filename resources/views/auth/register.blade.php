@@ -28,8 +28,8 @@
         <input type="password" name="password" placeholder="Password" required>
         <select name="role" required>
             <option value="">Select Role</option>
-            <option value="user" {{ old('role') == 'user' ? 'selected' : '' }}>User</option>
-            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+            <option value="teacher" {{ old('role') == 'teacher' ? 'selected' : '' }}>Teacher</option>
+            <option value="student" {{ old('role') == 'student' ? 'selected' : '' }}>Student</option>
         </select>
         <button type="submit">Register</button>
     </form>
